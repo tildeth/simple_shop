@@ -4,9 +4,11 @@ import {useState, useEffect} from 'react';
 const ProductDetail = () => {
 
     const router = useRouter();
-    const {id} = router.query;
-    const [product, setProduct] = useState(null);
+    const {id} = router.query;    // Henter produkt-ID fra URL'en
+    const [product, setProduct] = useState(null);  // Holder data for det valgte produkt
 
+
+    //Henter produktdetaljer fra API'en
     useEffect(() =>{
         if (id){
             const fetchProduct = async () => {
@@ -18,7 +20,7 @@ const ProductDetail = () => {
         }
     }, [id]);
 
-    if(!product) return <p>Loading...</p>;
+    if(!product) return <p>Loading...</p>;  //Viser Loading, Hvis produktdata ikke er hentet
 
     return ( 
     <div>
