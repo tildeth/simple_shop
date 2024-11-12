@@ -40,10 +40,10 @@ const ProductsPage = () => {
             <SearchAndFilter search={search} setSearch={setSearch} category={category} setCategory={setCategory} />
             <ProductList products={filteredProducts} addToCart={addToCart} />
             <Cart cart={cart} />
-            
+
         {/*Link til betalingssiden, hvor de valgtes produkters id er som URL-parameter */}
             <Link href={`/payment?items=${cart.map(item => item.id).join(',')}`}> 
-                <a>Gå til betaling ({cart.length} varer)</a>
+                Gå til betaling ({cart.length} varer)
             </Link>
          </div>
 

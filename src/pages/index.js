@@ -5,7 +5,7 @@ export default function Home() {
     <div >
       <h1>Velkommen til Zandiii</h1>
       <Link href="/products">
-      <a>Se vores lækkerier her!</a>
+      Se vores lækkerier her!
       </Link>
     </div>
   )
