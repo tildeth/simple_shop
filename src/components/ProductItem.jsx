@@ -7,6 +7,7 @@ const ProductItem = ({product, addToCart}) => {
                 {product.title}
             </Link>
             <button onClick={() => addToCart(product)}>Tilføj til kurv</button>
+
         </li>
      );
 };

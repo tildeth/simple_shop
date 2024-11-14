@@ -11,6 +11,7 @@ const ProductsPage = () => {
     const [search, setSearch] = useState(''); // State for søgeord indtastet af brugeren
     const [category, setCategory] = useState(''); // State for valgt kategori til filtrering
 
+    const totalPrice = cart.reduce((total, item) => total +item.product.price * item.quantity, 0).toFixed(2);
    
    // Henter produktdata fra API'en, når det bliver loadet første gang
     useEffect(() =>{
@@ -24,8 +25,38 @@ const ProductsPage = () => {
 
     //Tilføjer produkt til kurv
     const addToCart = (product) => {
-        setCart((prevCart) => [...prevCart, product]);
+        setCart((prevCart) => {
+
+            //Tjekker om produktet allerede er i kurven
+            const existingItem = prevCart.find((item) => item.product.id === product.id);
+
+            if (existingItem){
+                return prevCart.map((item) =>
+                item.product.id === product.id
+            ? {...item, quantity: item.quantity +1}
+            :item
+            );
+            } else{
+                return[...prevCart, {product, quantity: 1}];
+            }
+        })
     };
+
+    //Fjerner fra kurv
+    const removeFromCart = (product) => {
+        setCart((prevCart) =>{
+            const existingItem = prevCart.find((item) => item.product.id === product.id);
+            if(existingItem && existingItem.quantity > 1){
+                return prevCart.map((item)=>
+                item.product.id === product.id
+            ? {...item,quantity: item.quantity -1}
+            :item
+            );
+            } else{
+                return prevCart.filter((item)=> item.product.id !== product.id)
+            }
+        })
+    }
 
     //Filtrere på kategori og søgeord
     const filteredProducts = products.filter((product) => {
@@ -39,12 +70,9 @@ const ProductsPage = () => {
             <h1>Produkter</h1>
             <SearchAndFilter search={search} setSearch={setSearch} category={category} setCategory={setCategory} />
             <ProductList products={filteredProducts} addToCart={addToCart} />
-            <Cart cart={cart} />
+            <Cart cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />
 
-        {/*Link til betalingssiden, hvor de valgtes produkters id er som URL-parameter */}
-            <Link href={`/payment?items=${cart.map(item => item.id).join(',')}`}> 
-                Gå til betaling ({cart.length} varer)
-            </Link>
+       
          </div>
 
      )
