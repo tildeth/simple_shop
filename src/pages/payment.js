@@ -3,13 +3,10 @@ import { useEffect, useState } from "react";
 
 const PaymentPage = () => {
   const router = useRouter();
+  const { totalPrice } = router.query;
   const { items } = router.query; // Henter produkt-ID'er fra URL-parametre
   const [products, setProducts] = useState([]); // Holder data for produkterne i kurven
-
-  //Beregning af den samlet pris
-  const totalPrice = products
-    .reduce((total, product) => total + product.price, 0)
-    .toFixed(2);
+  
 
   // Henter produktdata baseret på de angivne ID'er i items
   useEffect(() => {
@@ -29,11 +26,11 @@ const PaymentPage = () => {
   }, [router.isReady, items]); // Kører når items ændrer sig
 
   return (
-    <div>
+    <div className="payment_page">
       <h1>Betaling</h1>
       <ul>
         {products.map((product) => (
-          <li key={product.id}>
+          <li key={product.id} className="product_item">
             <p>
               {product.title} - {product.price} DKK
             </p>
@@ -41,7 +38,7 @@ const PaymentPage = () => {
         ))}
       </ul>
       <p>At betale {totalPrice} DKK</p>
-      <button>Betal nu</button>
+      <button className="betal_nu">Betal nu</button>
     </div>
   );
 };

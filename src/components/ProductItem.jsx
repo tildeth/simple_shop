@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const ProductItem = ({product, addToCart}) => {
     return ( 
-        <li>
+        <li className="product_item">
             <Link href={`/products/${product.id}`}>
                 {product.title}
             </Link>

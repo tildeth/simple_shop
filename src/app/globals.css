@@ -88,6 +88,9 @@ body {
   border-radius: 8px;
   padding: 10px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   transition: transform 0.4 ease-in-out;
 }
 
@@ -96,7 +99,14 @@ body {
 }
 
 .product_image{
-  margin-bottom: 10px;
+  width: 150px;
+  height: 150px;
+  overflow: hidden; /* Skjuler overskydende del af billedet */
+  margin: 0 auto;
+}
+
+.product_image img {
+  object-fit: cover;
 }
 
 .product_item h3{
@@ -135,16 +145,16 @@ margin-bottom: 20px;
 
 .cart_items{
   display: flex;
-  flex-wrap: wrap;  
+  flex-direction: column;
   gap: 20px;
 }
 
-.cart.item{
+.cart_item{
   display: flex;
-  flex-direction: row;
-  width: 250px;  
+  width: 300px;  
   background-color: var(--product-bg);
   padding: 15px;
+  justify-content: space-between;
   border-radius: 8px;
   border: 1px solid var(--product-border);
   box-shadow: 0 4px 8px var(--shadow);
@@ -180,17 +190,25 @@ margin-bottom: 20px;
   background-color: var(--primary);
   color: white;
   border: none;
-  padding: 10px;
+
   border-radius: 5px;
   cursor: pointer;
   }
 
   .cart_button.add{
     background-color: var(--primary);
+    width: 30px;
+    height: 30px;
+    align-self: center;
+    text-align: center;
   }
 
   .cart_button.remove{
     background-color: var(--primary);
+    height: 30px;
+    width: 30px;
+    align-self: center;
+    text-align: center;
   }
 
   .cart_button:hover{
@@ -213,3 +231,96 @@ margin-bottom: 20px;
   .cart_payment_link:hover{
     background-color: var(--hover);
   }
+
+  /*NavBar styling*/
+  .navbar{
+    background-color: var(--primary);
+    padding: 15px 20px;
+    box-shadow: 0 4px 8px var(--shadow);
+  }
+
+  .navbar_list{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .navbar_item{
+    display: inline-block;
+  }
+
+  .navbar_link{
+    color: var(--foreground);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .navbar_link:hover{
+    background-color: var(--hover);
+    color: var(--background);
+  }
+
+  .navbar_link:active{
+background-color: var(--secondary);
+  }
+
+  @media (max-width: 768px) {
+    .navbar_list {
+      flex-direction: column; /* Kolonne layout på små skærme */
+      align-items: center;
+    }
+  
+    .navbar_link {
+      font-size: 1rem;
+      padding: 8px 15px;
+    }
+  }
+/* Styling af produkt side*/
+.container_products{
+
+}
+
+.product_cart{
+  display: grid;
+grid-template-columns: 1fr auto;
+gap: 20px;
+}
+
+/*Styling af payment*/
+
+.payment_page{
+  background-color: var(--background-light);
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.payment_page h1{
+  text-align: center;
+  color: var(--foreground);
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.betal_nu{
+  background-color: var(--primary);
+  color: var(--background);
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.betal_nu:hover{
+  background-color: var(--hover);
+}

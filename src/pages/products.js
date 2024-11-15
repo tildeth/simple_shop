@@ -67,8 +67,10 @@ const ProductsPage = ({ cart, setCart }) => {
             <h1>Produkter</h1>
             <SearchAndFilter search={search} setSearch={setSearch} category={category} setCategory={setCategory} />
             <p>{filteredProducts.length} varer tilgængelige.</p>
+            <div className='product_cart'>
             <ProductList products={filteredProducts} addToCart={addToCart} />
             <Cart cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />
+            </div>
 
        
          </div>

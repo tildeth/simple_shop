@@ -38,7 +38,7 @@ const Cart = ({ cart, addToCart, removeFromCart }) => {
         ))}
       </div>
       {/*Link til betalingssiden, hvor de valgtes produkters id er som URL-parameter */}
-      <Link href={`/payment?items=${itemsIds}`} className="cart_payment_link">
+      <Link href={`/payment?items=${itemsIds}&totalPrice=${totalPrice}`}className="cart_payment_link">
         Gå til betaling ({totalPrice} DKK)
       </Link>
     </div>

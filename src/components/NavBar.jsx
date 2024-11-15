@@ -2,16 +2,16 @@ import Link from "next/link";
 
 const NavBar = ({cartCount}) => {
     return (  
-        <nav>
-            <ul>
-                <li>
-                    <Link href="/">Forside</Link>
+        <nav className="navbar">
+            <ul className="navbar_list">
+                <li className="navbar_item">
+                    <Link href="/" className="navbar_link">Forside</Link>
                 </li>
-                <li>
-                    <Link href="/products">Produkter</Link>
+                <li className="navbar_item">
+                    <Link href="/products" className="navbar_link">Produkter</Link>
                 </li>
-                <li>
-                    <Link href="/payment">Kurv{cartCount}</Link>
+                <li className="navbar_item">
+                    <Link href="/payment" className="navbar_link">Kurv ({cartCount})</Link>
                 </li>
             </ul>
         </nav>
