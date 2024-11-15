@@ -27,18 +27,25 @@ const ProductDetail = ({cart, setCart, addToCart}) => {
         addToCart(product)
  };
     return ( 
-    <div>
-        <button onClick={() => router.back()}>Tilbage</button>
+    <div className='product_detail'>
+        <button className="back_button" onClick={() => router.back()}>Tilbage</button>
+        <div className="product_content">
+        <div className="single_image">
         <Image
         src={product.images[0]}
         alt={product.title}
         width={500} 
-        height={500}  />
-        <h1>{product.title}</h1>
-        <p>{product.description}</p>
-        <p>Pris: {product.price} DKK</p>
-        <button onClick={handleAddToCart}>Tilføj til kurv</button>
-
+        height={500} 
+        layout="responsive"
+            className="image_single" />
+        </div>
+        <div className="product_info">
+        <h1 className="single_title">{product.title}</h1>
+        <p className="product_description">{product.description}</p>
+        <p  className="single_price">Pris: {product.price} DKK</p>
+        <button className="add_to_cart" onClick={handleAddToCart}>Tilføj til kurv</button>
+        </div>
+        </div>
     </div>
      );
 };

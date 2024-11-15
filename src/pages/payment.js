@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const PaymentPage = () => {
+const PaymentPage = ({addToCart, removeFromCart}) => {
   const router = useRouter();
   const { totalPrice } = router.query;
-  const { items } = router.query; // Henter produkt-ID'er fra URL-parametre
+  const { items, toalPrice } = router.query; // Henter produkt-ID'er fra URL-parametre
   const [products, setProducts] = useState([]); // Holder data for produkterne i kurven
   
 
@@ -12,14 +12,24 @@ const PaymentPage = () => {
   useEffect(() => {
     if (router.isReady && items) {
       const fetchProducts = async () => {
-        const productIds = items.split(","); // Deler ID'erne i items op i en array
+        const itemData = items.split(",").map((item)=> {
+          const [id, quantity] = item.split(":");
+          return {id, quantity: parseInt(quantity,10)};
+        })
+        
         const responses = await Promise.all(
-          productIds.map((id) => fetch(`https://dummyjson.com/products/${id}`))
+          itemData.map(({id}) => fetch(`https://dummyjson.com/products/${id}`))
         );
         const productsData = await Promise.all(
           responses.map((res) => res.json())
         );
-        setProducts(productsData); // Sætter de hentede produktdata i products state. Promise.all udfører paralelle API-kald, der sørger for alle valgte produkter kommer i kurven på sammetid.
+
+        const productsWithQuantities = productsData.map((product, index)=> ({
+          ...product,
+          quantity: itemData[index].quantity,
+        }));
+
+        setProducts(productsWithQuantities); 
       };
       fetchProducts();
     }
@@ -32,8 +42,9 @@ const PaymentPage = () => {
         {products.map((product) => (
           <li key={product.id} className="product_item">
             <p>
-              {product.title} - {product.price} DKK
+              {product.title} - {product.price} DKK ({product.quantity} stk.)
             </p>
+           
           </li>
         ))}
       </ul>

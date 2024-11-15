@@ -6,7 +6,10 @@ const Cart = ({ cart, addToCart, removeFromCart }) => {
     .reduce((total, item) => total + item.product.price * item.quantity, 0)
     .toFixed(2);
 
-  const itemsIds = cart.map((item) => item.product.id).join(",");
+// Opret en query string, der inkluderer både ID og quantity for hvert produkt
+const itemsWithQuantities = cart
+.map((item) => `${item.product.id}:${item.quantity}`)
+.join(",");
 
   return (
     <div className="cart">
@@ -38,7 +41,7 @@ const Cart = ({ cart, addToCart, removeFromCart }) => {
         ))}
       </div>
       {/*Link til betalingssiden, hvor de valgtes produkters id er som URL-parameter */}
-      <Link href={`/payment?items=${itemsIds}&totalPrice=${totalPrice}`}className="cart_payment_link">
+      <Link href={`/payment?items=${itemsWithQuantities}&totalPrice=${totalPrice}`}className="cart_payment_link">
         Gå til betaling ({totalPrice} DKK)
       </Link>
     </div>
