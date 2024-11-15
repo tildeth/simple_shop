@@ -3,19 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fdf1f6; 
+  --foreground: #171717;  
+  --primary: #ff88b4;      
+  --secondary: #d5a5d5;    
+  --hover: #f1a8c9;         
+  --input-border: #d5a5d5; 
+  --product-bg: #fff;      
+  --product-border: #f1c6d1;
+  --shadow: rgba(0, 0, 0, 0.1); 
+
+  /* Farver til mørkt tema */
+  --background-dark: #0a0a0a;  
+  --foreground-dark: #ededed;   
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--background-dark);
+    --foreground: var(--foreground-dark);
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+ color: var(--foreground);
+ background: var(--background);
+ font-family: Arial, Helvetica, sans-serif;
+ line-height: 1.6;
 }
+
+/*Styling af search og filter*/
+
+

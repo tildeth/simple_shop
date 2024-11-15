@@ -6,12 +6,26 @@ function MyApp({ Component, pageProps }) {
   
     // Beregn antal varer i kurven
     const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+    const addToCart = (product) => {
+        setCart((prevCart) => {
+            const existingItem = prevCart.find((item) => item.product.id === product.id);
+            if (existingItem) {
+                return prevCart.map((item) =>
+                    item.product.id === product.id
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
+                );
+            } else {
+                return [...prevCart, { product, quantity: 1 }];
+            }
+        });
+    };
   
     return (
       <>
         <NavBar cartCount={cartCount} />
-        {/* Giv cart og setCart videre som props til alle sider */}
-        <Component {...pageProps} cart={cart} setCart={setCart} />
+        <Component {...pageProps} cart={cart} setCart={setCart} addToCart={addToCart} />
       </>
     );
   }

@@ -63,7 +63,7 @@ const ProductsPage = ({ cart, setCart }) => {
     });
 
     return ( 
-        <div>
+        <div className='container_products'>
             <h1>Produkter</h1>
             <SearchAndFilter search={search} setSearch={setSearch} category={category} setCategory={setCategory} />
             <p>{filteredProducts.length} varer tilgængelige.</p>
