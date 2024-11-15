@@ -7,9 +7,9 @@ const SearchAndFilter = ({search, setSearch, category, setCategory}) => {
             <input type="text"
             placeholder="Søg..."
             value={search}
-            onChange={(e) => setSearch(e.target.value)} 
+            onChange={(e) => setSearch(e.target.value)} className="search_input" 
             />
-            <select onChange={(e) => setCategory(e.target.value)} value={category}>
+            <select onChange={(e) => setCategory(e.target.value)} value={category} className="category_select">
                 <option value="">Alle</option>
                 <option value="beauty">Skønhed</option>
                 <option value="fragrances">Parfume</option>

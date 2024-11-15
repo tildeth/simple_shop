@@ -1,5 +1,6 @@
 import { useState } from "react";
 import NavBar from "@/components/NavBar";
+import "../app/globals.css";
 
 function MyApp({ Component, pageProps }) {
     const [cart, setCart] = useState([]); // Global state til kurven
