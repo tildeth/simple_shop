@@ -1,17 +1,14 @@
 import {useState, useEffect} from 'react';
-import Link from 'next/link';
 import ProductList from "../components/ProductList";
 import Cart from "../components/Cart";
 import SearchAndFilter from "../components/SearchAndFilter.jsx";
 
-const ProductsPage = () => {
+const ProductsPage = ({ cart, setCart }) => {
 
     const [products, setProducts] = useState([]); // Holder data for alle produkter
-    const [cart, setCart] =useState([]); // Holder produkter i kurven
     const [search, setSearch] = useState(''); // State for søgeord indtastet af brugeren
     const [category, setCategory] = useState(''); // State for valgt kategori til filtrering
 
-    const totalPrice = cart.reduce((total, item) => total +item.product.price * item.quantity, 0).toFixed(2);
    
    // Henter produktdata fra API'en, når det bliver loadet første gang
     useEffect(() =>{
@@ -69,6 +66,7 @@ const ProductsPage = () => {
         <div>
             <h1>Produkter</h1>
             <SearchAndFilter search={search} setSearch={setSearch} category={category} setCategory={setCategory} />
+            <p>{filteredProducts.length} varer tilgængelige.</p>
             <ProductList products={filteredProducts} addToCart={addToCart} />
             <Cart cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />
 
